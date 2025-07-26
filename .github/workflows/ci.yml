@@ -50,7 +50,6 @@ on:
     branches:
       - master 
       - main
-  # 禁止从 fork 仓库访问 secrets
   pull_request:
     types: [closed]
     branches: [main, master]
@@ -78,6 +77,8 @@ jobs:
           path: .cache
           restore-keys: |
             mkdocs-material-
+      # 添加缺失的宏插件安装
+      - run: pip install mkdocs-macros-plugin
       - run: pip install mkdocs-git-revision-date-localized-plugin
       - run: pip install mkdocs-git-authors-plugin
       - run: pip install mkdocs-git-committers-plugin-2
@@ -95,21 +96,17 @@ jobs:
       - run: pip install --upgrade --force-reinstall mkdocs-material
       - name: Deploy with AI Summary
         env:
-          # AI摘要开关控制
-          AI_SUMMARY_CI_ENABLED: 'true'           # CI部署环境启用AI摘要 (true=在CI中为文章生成AI摘要)
-          AI_SUMMARY_CI_ONLY_CACHE: 'false'       # CI部署不生成新摘要 (true=使用本地部署过的摘要缓存，不再重复调用API)
-          AI_SUMMARY_CI_FALLBACK: 'true'          # CI部署启用备用摘要 (true=API失败时生成离线基础摘要)
-          AI_SUMMARY_CACHE_ENABLED: 'true'        # 启用缓存功能
-          AI_SUMMARY_CACHE_EXPIRE_DAYS: '3000'       # 缓存7天过期
-          AI_SUMMARY_CACHE_AUTO_CLEAN: 'true'     # 自动清理过期缓存
-          # AI_SUMMARY_LOCAL_ENABLED: 'false'       # 本地部署环境禁用AI摘要 (true=本地开发时也生成摘要)（不需要管这条）
-          # API密钥配置
+          AI_SUMMARY_CI_ENABLED: 'true'
+          AI_SUMMARY_CI_ONLY_CACHE: 'false'
+          AI_SUMMARY_CI_FALLBACK: 'true'
+          AI_SUMMARY_CACHE_ENABLED: 'true'
+          AI_SUMMARY_CACHE_EXPIRE_DAYS: '3000'
+          AI_SUMMARY_CACHE_AUTO_CLEAN: 'true'
           GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: mkdocs gh-deploy --force
       
-      # 自动提交新生成的AI缓存文件
       - name: Auto-commit AI cache (if any new files)
         run: |
           if [ -d ".ai_cache" ] && [ "$(ls -A .ai_cache 2>/dev/null)" ]; then
