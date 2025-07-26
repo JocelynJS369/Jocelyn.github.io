@@ -1,0 +1,93 @@
+site_name: WentingJia's Personal Website
+site_url: http://localhost:8000
+site_description: 个人作品集与技术博客
+site_author: Wenting Jia
+
+# ========== 主题配置 ==========
+theme:
+  name: material
+  custom_dir: docs/overrides
+  language: zh
+  # 颜色方案
+  palette:
+    primary: deep-purple
+    accent: amber
+    toggle:
+      icon: material/weather-night
+      name: 深色模式
+  # 主题功能
+  features:
+    - navigation.tabs
+    - navigation.top
+    - toc.integrate
+    - contact.code.annotate
+    - content.tabs  # 选项卡功能
+    - content.code.copy
+    - content.code.select
+  # 字体设置
+  font:
+    text: Noto Sans SC
+    code: JetBrains Mono
+  # 社交链接
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/wentingjia
+      name: GitHub
+    - icon: fontawesome/brands/dribbble
+      link: https://dribbble.com/wentingjia
+      name: Dribbble
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/wentingjia
+      name: Twitter
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/wentingjia
+      name: LinkedIn
+  # 自定义图标
+  icon:
+    logo: material/rocket-launch
+  # 阅读时间统计
+  hooks:
+    - docs/overrides/hooks/reading_time.py    
+
+# ========== 导航菜单 ==========
+nav:
+  - 主页: index.md
+  - 个人简历（欢迎查看下载）: about.md
+  - 项目经历:
+      - 项目一: projects/project1.md
+      - 项目二: projects/project2.md
+  - 博客文章（目标周更）:
+      - 文章: 
+        - 2025/7/26: blog/paper1.md
+      - 总览: blog/all.md
+  - 生活时刻（每日小确幸）: life.md
+  - 联系方式: contact.md  
+
+# ========== 插件配置 ==========
+plugins:
+  - search
+  - macros
+  - document-dates
+# ========== 额外配置 ==========
+extra_css:
+  - css/custom.css
+  - stylesheets/obsidian.css
+  - https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css
+  # - https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.1.0/style.css
+  # - https://cdn.jsdelivr.net/npm/lxgw-wenkai-tc-webfont@1.0.0/style.css
+  # - https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css
+
+extra_javascript:
+  - js/custom.js
+  - assets/document_dates/core/timeago.full.min.js
+  - assets/document_dates/core/timeago-load.js
+# 扩展Markdown语法
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.mark
+
+# ========== 版权信息 ==========
+copyright: Copyright &copy; 2025 Wenting Jia
