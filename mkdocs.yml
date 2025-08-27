@@ -54,13 +54,30 @@ nav:
   - 主页: index.md
   - 个人简历（欢迎查看下载）: about.md
   - 项目经历:
-      - 项目一: projects/project1.md
-      - 项目二: projects/project2.md
-  - 博客文章（目标周更）:
+      - 超视距抛洒物感知预警系统: projects/project1.md
+      - Paper-EMSA-Net: projects/project8.md
+      - 危化品在途运输主动防控系统: projects/project2.md
+      - 波比陪伴机器人: projects/project7.md
+      - 太空资源开发可行性研究: projects/project6.md
+      - 智能衣物护理机: projects/project3.md
+      - 杂项案例1: projects/project4.md
+      - 杂项案例2: projects/project5.md
+  - 博客文章:
       - 文章: 
         - 2025/7/26: blog/paper1.md
+        - FreeRTOS: blog/paper2.md
+        - LVGL屏幕: blog/paper3.md 
+        - 2025/8/: blog/paper4.md
+        - 2025/8/: blog/paper5.md
+        - 2025/8/: blog/paper6.md
       - 总览: blog/all.md
-  - 生活时刻（每日小确幸）: life.md
+  - 生活时刻（小确幸）: 
+        - 2025/8/4: plog/life1.md
+        - 2025/8/5: plog/life2.md
+        - 2025/8/: plog/life3.md
+        - 2025/8/: plog/life4.md
+        - 2025/8/: plog/life5.md
+        - 2025/8/: plog/life6.md
   - 联系方式: contact.md  
 
 # ========== 插件配置 ==========
@@ -68,10 +85,19 @@ plugins:
   - search
   - macros
   - document-dates
+  - mermaid2:
+      arguments:
+        theme: default
+        fontFamily: "sans-serif"
+        fontSize: 16
+        securityLevel: "loose"
+      include_css: true
+      include_js: true
 # ========== 额外配置 ==========
 extra_css:
   - css/custom.css
   - stylesheets/obsidian.css
+  - css/extra.css
   - https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css
   # - https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.1.0/style.css
   # - https://cdn.jsdelivr.net/npm/lxgw-wenkai-tc-webfont@1.0.0/style.css
@@ -79,10 +105,17 @@ extra_css:
 
 extra_javascript:
   - js/custom.js
+  - js/extra.js
+  - js/mathjax.js
   - assets/document_dates/core/timeago.full.min.js
   - assets/document_dates/core/timeago-load.js
 # 扩展Markdown语法
 markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
