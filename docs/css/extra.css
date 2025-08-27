@@ -1,0 +1,24 @@
+/* 移除原跟随光标样式 */
+#cursor {
+  display: none !important;
+}
+
+/* 设置自定义光标 */
+* {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32"><path fill="%237B2CBF" d="M6 2L26 16L18 20L22 30L14 24L6 30Z"/><path fill="%239D4EDD" d="M6 2L26 16L18 20L6 30Z"/><path fill="%235A189A" d="M6 2L14 24L6 30Z"/></svg>') 0 0, auto;
+}
+
+/* 为指针元素添加特殊效果 */
+a, button, [onclick], [cursor="pointer"] {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32"><path fill="%237B2CBF" d="M16 4C10 4 8 12 8 18C8 24 12 28 16 28C20 28 24 24 24 18C24 12 22 4 16 4Z"/><path fill="%239D4EDD" d="M16 6C19 6 22 12 22 18C22 24 19 26 16 26C13 26 10 24 10 18C10 12 13 6 16 6Z"/></svg>') 16 16, pointer;
+}
+
+/* 点击效果 */
+body.click-active * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"><path fill="%237B2CBF" d="M6 2L26 16L18 20L22 30L14 24L6 30Z"/><path fill="%239D4EDD" d="M6 2L26 16L18 20L6 30Z"/><path fill="%235A189A" d="M6 2L14 24L6 30Z"/></svg>') 0 0, auto;
+}
+
+/* 悬停效果 */
+.hover-effect *:hover {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="36" height="36"><path fill="%237B2CBF" d="M6 2L26 16L18 20L22 30L14 24L6 30Z"/><path fill="%239D4EDD" d="M6 2L26 16L18 20L6 30Z"/><path fill="%235A189A" d="M6 2L14 24L6 30Z"/></svg>') 0 0, auto;
+}

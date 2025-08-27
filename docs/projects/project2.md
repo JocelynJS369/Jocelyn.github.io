@@ -1,72 +1,119 @@
-!!! info 
-    作者：[弗兰克扬](https://www.zhihu.com/people/fu-lan-ke-yang)<br>
-    摘录原因：因为觉得对大学生祛魅很有帮助，故在此摘录，不过这里只摘录了故事的第一话，全集请移步知乎[白非立合集](https://zhuanlan.zhihu.com/p/91072728)
-
-# 第二十二周
-## 周一
-- [x] <del style="color:red;">Crash Course Philosophy</del>
-- [x] <del style="color:red;">因为在学manim，设置一下在VScode用Jupyter，Jupyter渲染一些小的clip的时候还是很好用的</del> 
-- [x] <del style="color:red;">刑法学</del>
-
-## 周二
-- [x] <del style="color:red;">Crash Course Philosophy</del>
-- [x] <del style="color:red;">刑法学</del>
-
-## 周三
-- [x] <del style="color:red;">刑法学</del>
-- [x] <del><span style="color:black; background-color:#ffff00;">刑法学</span></del>
-  
-## 周四
-- [x] <del style="color:red;">刑法学</del>
-
-## 周五
-- [x] <del style="color:red;">刑法学</del>
-
-## 周六
-- [x] <del style="color:red;">刑法学</del>
-
-## 周日
-- [x] <del style="color:red;">刑法学</del>
-
-# <strong>白非立上进记（1）</strong>
-2008年夏天，白非立以五十分之差与自己努力奋斗，寒窗苦读十多年的目标，清华大学，“擦肩而过”。
-
-白非立最终只拿到了一所他高中三年最鄙夷的鱼腩985大学的录取通知书，专业还是天坑专业。
-
-那个高三暑假的夏天，白非立逢人便说，自己高考那几天不幸重感冒，被分配的考场正好倒霉催得，还有空调，空调还正好调得温度很低，门窗紧闭。
-
-结果就是，别的考生都在享受着酷暑中的考场凉意，超常发挥，而重感冒的白非立却感到愈加难受，于是就发挥失常，自称少考了一百分，否则上清华肯定是妥妥的。
-
-听到这番言辞的白非立的同学们都无不露出了鄙夷的眼神，觉得白非立真是太能给自己找补了，明明就这水平，还非说是状元发挥失常。
-
-白非立遇到了十个高中同班同学，听完他这一番描述后。
-
-有三个一脸冷漠地对他说，“那你去复读学校复读去啊！明年拿理科状元”
-
-还有三个一脸愤怒地说，“你就别得了便宜还卖乖了吧，你也就是个中不溜211水平，能上个垫底985都是你烧高香，超常发挥了！咱班的庞统考上了北大，孔明考上了清华，人家常年班级前两名，你高三一年进过咱班前十吗？还清华水平，谁信你呀！”
-
-还有三个略带嘲讽地说，“是的，你要不是数学和理综发挥失常，正好遇到了十几道不会的题，今年咱班又能多一个考上清华的，可惜了，可惜了啊！”
-
-只有一个平时不怎么跟白非立说话的杨志强，听完后拍了拍白非立的肩膀，说，“我一直都认可你的才华，不要失望，锥在囊中，锋芒毕露！虽然没考上清华，我相信你还是有清华的水平的，四年后，你肯定能读清华的研究生！”
-
-虽然听完后觉得有点怪怪的，但白非立还是觉得受到了莫大的鼓舞，仿佛前方一下子就有了方向。
-
-白非立也用力地拍了拍杨志强的肩膀，说“够哥们！咱们四年后在清华见！”
-
-这个杨志强被一所白非立比较认可的985学校的天坑专业录取。
-
---------------
-
-然而事实上，高考那天白非立并没有重感冒，甚至精神状态还异常地好，考试的时候还遇到了好几道自己复习过的题，能考这个分数确实如同学所说的，已经是超常发挥了，毕竟平时的成绩摆在那里，不会说谎。
-
-但白非立高三一整年最爱说的一句话就是“许多奇迹，我们相信，才会存在！”
-
-虽然是当时很火的流行歌的歌词，但这句歌词却像某种精神象征一样，在高三一整年都给了白非立无穷的力量，他把这句话写在了所有的课本和辅导书的首页，也写在了纸条上并粘在了自己的课桌上。
-
-整个高三，白非立逢人便讲，自己命中注定是要上清华的，还没到最后一刻，谁也不知道比赛结果，别把话说太死，到时候打脸哦！
-
-成绩出来后，为了填这个自己给自己挖的坑，于是便有了一开始的那个高考发挥失常论。
-
-曾经憧憬过无数次的，高考后的暑假还未正式开始，白非立便投入到了新一轮的奋斗中，因为他立志大学四年一定要和周围的同学不一样，争取以最好的结果去读清华的研究生！
-
-然而这一切，仅仅是一系列悲欢故事的开始。
+<body>
+    <div class="container">
+        <header class="project-header">
+            <p class="project-title">基于C-V2X的危化品运输在途主动防控系统</p>
+            <div class="project-meta">
+                <div class="meta-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>2025-05-06</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-tags"></i>
+                    <span>学科竞赛项目</span>
+                </div>
+            </div>
+        </header>
+        <main class="project-content">
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-quote-left"></i>
+                    <span>项目介绍</span>
+                </h2>
+                <div class="intro-card">
+                    针对危化品在途运输监管滞后与应急响应低效的问题，本项目基于 C-V2X 技术构建了主动防控系统。
+                </div>
+            </section>
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-tasks"></i>
+                    <span>主要工作</span>
+                </h2>
+                <div class="role-badge">团队负责人 + 技术负责人</div>
+                <p>负责项目的整体设计和技术实现</p>
+                <h3 style="margin: 20px 0 10px; color: #5e35b1;">具体职责：</h3>
+                <ul class="responsibilities">
+                    <li>参与数据集标注制作(labelimg)</li>
+                    <li>负责Web界面搭建(Cursor)</li>
+                    <li>负责检查算法改进和模型训练(YOLOv11)</li>
+                    <li>负责所有传感器的调试与连接(Arduino)</li>
+                </ul>
+                <h3 style="margin: 25px 0 15px; color: #5e35b1;">技术栈：</h3>
+                <table class="tech-table">
+                    <tr>
+                        <th>类别</th>
+                        <th>详情</th>
+                    </tr>
+                    <tr>
+                        <td>编程语言</td>
+                        <td>C、Python</td>
+                    </tr>
+                    <tr>
+                        <td>Web框架</td>
+                        <td>Flask</td>
+                    </tr>
+                    <tr>
+                        <td>算法</td>
+                        <td>YOLOv11、YOLOv8、PP-YOLOE、DETR</td>
+                    </tr>
+                    <tr>
+                        <td>硬件</td>
+                        <td>松灵SCOUT MINI Pro 小车，路侧感知站，5G基站，ESP8266，ESP32</td>
+                    </tr>
+                </table>
+            </section>
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-trophy"></i>
+                    <span>项目成果</span>
+                </h2>
+                <div class="achievements">
+                    <div class="achievement-card">
+                            <i class="fas fa-award"></i>
+                        <h3 class="achievement-title">全国大学生交通运输科技大赛</h3>
+                        <p>省级一等奖</p>
+                    </div>
+                    <div class="achievement-card">
+                            <i class="fas fa-medal"></i>
+                        <h3 class="achievement-title">中国大学生计算机设计大赛</h3>
+                        <p>省级二等奖</p>
+                    </div>
+                    <div class="achievement-card">
+                            <i class="fas fa-graduation-cap"></i>
+                        <h3 class="achievement-title">校级大学生创新创业训练计划项目</h3>
+                        <p>成功立项</p>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-camera"></i>
+                    <span>照片记录</span>
+                </h2>
+                <div class="photo-gallery">
+                    <div class="photo-item"> 
+                    <img src="../assets/pro11.jpg" alt="项目演示照片">
+                    </div>
+                    <div class="photo-item">
+                    <img src="../assets/pro12.jpg" alt="系统架构图">
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-camera"></i>
+                    <span>介绍视频</span>
+                </h2>
+                <div class="photo-gallery1">
+                    <div class="photo-item1"> 
+                <video width="100%"  
+                       height="500px"  
+                       controls  
+                       preload="auto"  
+                       <source src="../assets/pro2.mp4" type="video/mp4">
+                </video>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
