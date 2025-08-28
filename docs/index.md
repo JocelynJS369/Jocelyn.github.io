@@ -166,7 +166,7 @@
                             <span class="project-tech"><strong>技术栈</strong></span>: ESP-IDF + C + VSCode + LVGL
                         </div>
                     </div>
-                    <a href="/projects/project3" class="md-button">查看项目详情</a>
+                    <a href="../projects/project3" class="md-button">查看项目详情</a>
                 </div>
             </div>
         </div>
