@@ -1,4 +1,6 @@
 mkdocs-material>=9.0
 mkdocs-git-revision-date-plugin
 mkdocs-macros-plugin
+mkdocs-document-dates  # 对应 document-dates 插件
+mkdocs-mermaid2-plugin  # 对应 mermaid2 插件
 pymdown-extensions
