@@ -90,6 +90,7 @@ jobs:
       - run: pip install Pillow
       - run: pip install neoteroi-mkdocs
       - run: pip install mkdocs-macros-plugin  # 添加这一行
+      - run: pip install mkdocs-mermaid2-plugin  # 添加这一行
       
       - run: pip install mkdocs-document-dates==3.3
       - run: pip install pymdown-extensions
