@@ -95,36 +95,5 @@ jobs:
       - run: pip install mkdocs-material 
       - run: pip install --upgrade --force-reinstall mkdocs-material
 
-      - run: pip install mkdocs-ai-summary-wcowin
-      - name: Deploy with AI Summary
-        env:
-          # AI摘要开关控制
-          AI_SUMMARY_CI_ENABLED: 'false'           # CI部署环境启用AI摘要 (true=在CI中为文章生成AI摘要)
-          AI_SUMMARY_CI_ONLY_CACHE: 'false'       # CI部署不生成新摘要 (true=使用本地部署过的摘要缓存，不再重复调用API)
-          AI_SUMMARY_CI_FALLBACK: 'false'          # CI部署启用备用摘要 (true=API失败时生成离线基础摘要)
-          AI_SUMMARY_CACHE_ENABLED: 'false'        # 启用缓存功能
-          AI_SUMMARY_CACHE_EXPIRE_DAYS: '3000'       # 缓存7天过期
-          AI_SUMMARY_CACHE_AUTO_CLEAN: 'true'     # 自动清理过期缓存
-          # AI_SUMMARY_LOCAL_ENABLED: 'false'       # 本地部署环境禁用AI摘要 (true=本地开发时也生成摘要)（不需要管这条）
-          # API密钥配置
-          GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - name: Deploy documentation
         run: mkdocs gh-deploy --force
-      
-      # 自动提交新生成的AI缓存文件
-      - name: Auto-commit AI cache (if any new files)
-        run: |
-          if [ -d ".ai_cache" ] && [ "$(ls -A .ai_cache 2>/dev/null)" ]; then
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git add .ai_cache/
-            if ! git diff --cached --quiet; then
-              git commit -m "🤖 Auto-update AI summary cache [skip ci]"
-              git push
-              echo "✅ 自动提交了新的 AI 缓存文件"
-            else
-              echo "ℹ️ 没有新的缓存文件需要提交"
-            fi
-          else
-            echo "ℹ️ 没有找到缓存目录或缓存为空"
-          fi
