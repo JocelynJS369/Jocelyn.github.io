@@ -142,7 +142,7 @@
                             <span class="project-tech"><strong>技术栈</strong></span>: Flask + JavaScript + ROS1
                         </div>
                     </div>
-                    <a href="/docs/projects/project1" class="md-button">查看项目详情</a>
+                    <a href="/docs/projects/project1.md" class="md-button">查看项目详情</a>
                 </div>
             </div>
             <div class="project-card-vertical">
@@ -154,7 +154,7 @@
                             <span class="project-tech"><strong>技术栈</strong></span>: Flask + JavaScript + Arduino
                         </div>
                     </div>
-                    <a href="/docs/projects/project2" class="md-button">查看项目详情</a>
+                    <a href="/docs/projects/project2.md" class="md-button">查看项目详情</a>
                 </div>
             </div>
             <div class="project-card-vertical">
@@ -166,7 +166,7 @@
                             <span class="project-tech"><strong>技术栈</strong></span>: ESP-IDF + C + VSCode + LVGL
                         </div>
                     </div>
-                    <a href="/docs/projects/project3" class="md-button">查看项目详情</a>
+                    <a href="/docs/projects/project3.md" class="md-button">查看项目详情</a>
                 </div>
             </div>
         </div>
