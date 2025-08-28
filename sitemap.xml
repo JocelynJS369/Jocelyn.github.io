@@ -13,6 +13,38 @@
          <lastmod>2025-08-28</lastmod>
     </url>
     <url>
+         <loc>http://localhost:8000/blog/</loc>
+         <lastmod>2025-08-28</lastmod>
+    </url>
+    <url>
+         <loc>http://localhost:8000/blog/all/</loc>
+         <lastmod>2025-08-28</lastmod>
+    </url>
+    <url>
+         <loc>http://localhost:8000/blog/paper1/</loc>
+         <lastmod>2025-08-28</lastmod>
+    </url>
+    <url>
+         <loc>http://localhost:8000/blog/paper2/</loc>
+         <lastmod>2025-08-28</lastmod>
+    </url>
+    <url>
+         <loc>http://localhost:8000/blog/paper3/</loc>
+         <lastmod>2025-08-28</lastmod>
+    </url>
+    <url>
+         <loc>http://localhost:8000/blog/paper4/</loc>
+         <lastmod>2025-08-28</lastmod>
+    </url>
+    <url>
+         <loc>http://localhost:8000/blog/paper5/</loc>
+         <lastmod>2025-08-28</lastmod>
+    </url>
+    <url>
+         <loc>http://localhost:8000/blog/paper6/</loc>
+         <lastmod>2025-08-28</lastmod>
+    </url>
+    <url>
          <loc>http://localhost:8000/plog/life1/</loc>
          <lastmod>2025-08-28</lastmod>
     </url>

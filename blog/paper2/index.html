@@ -1,0 +1,1135 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="个人作品集与技术博客" name="description"/>
+<meta content="Wenting Jia" name="author"/>
+<link href="http://localhost:8000/blog/paper2/" rel="canonical"/>
+<link href="../paper1/" rel="prev"/>
+<link href="../paper3/" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.18" name="generator"/>
+<title>FreeRTOS - WentingJia's Personal Website</title>
+<link href="../../assets/stylesheets/main.7e37652d.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"JetBrains Mono"}</style>
+<link href="../../css/custom.css" rel="stylesheet"/>
+<link href="../../stylesheets/obsidian.css" rel="stylesheet"/>
+<link href="../../css/extra.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="../../assets/document_dates/tippy/tippy.css" rel="stylesheet"/>
+<link href="../../assets/document_dates/tippy/backdrop.css" rel="stylesheet"/>
+<link href="../../assets/document_dates/tippy/material.css" rel="stylesheet"/>
+<link href="../../assets/document_dates/tippy/light.css" rel="stylesheet"/>
+<link href="../../assets/document_dates/tippy/shift-away.css" rel="stylesheet"/>
+<link href="../../assets/document_dates/tippy/scale.css" rel="stylesheet"/>
+<link href="../../assets/document_dates/core/core.css" rel="stylesheet"/>
+<link href="../../assets/document_dates/user.config.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="amber" data-md-color-primary="deep-purple" data-md-color-scheme="default" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#freertosfrom-yuannyang-yao">
+          跳转至
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="WentingJia's Personal Website" class="md-header__button md-logo" data-md-component="logo" href="../.." title="WentingJia's Personal Website">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m13.13 22.19-1.63-3.83c1.57-.58 3.04-1.36 4.4-2.27zM5.64 12.5l-3.83-1.63 6.1-2.77C7 9.46 6.22 10.93 5.64 12.5M21.61 2.39S16.66.269 11 5.93c-2.19 2.19-3.5 4.6-4.35 6.71-.28.75-.09 1.57.46 2.13l2.13 2.12c.55.56 1.37.74 2.12.46A19.1 19.1 0 0 0 18.07 13c5.66-5.66 3.54-10.61 3.54-10.61m-7.07 7.07c-.78-.78-.78-2.05 0-2.83s2.05-.78 2.83 0c.77.78.78 2.05 0 2.83s-2.05.78-2.83 0m-5.66 7.07-1.41-1.41zM6.24 22l3.64-3.64c-.34-.09-.67-.24-.97-.45L4.83 22zM2 22h1.41l4.77-4.76-1.42-1.41L2 20.59zm0-2.83 4.09-4.08c-.21-.3-.36-.62-.45-.97L2 17.76z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            WentingJia's Personal Website
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              FreeRTOS
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="查找" class="md-search__options">
+<button aria-label="清空当前内容" class="md-search__icon md-icon" tabindex="-1" title="清空当前内容" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<nav aria-label="标签" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../..">
+        
+  
+  
+    
+  
+  主页
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../about/">
+        
+  
+  
+    
+  
+  个人简历（欢迎查看下载）
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../projects/project1/">
+          
+  
+  
+  项目经历
+
+        </a>
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../paper1/">
+          
+  
+  
+  博客文章
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../plog/life1/">
+          
+  
+  
+  生活时刻（小确幸）
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../contact/">
+        
+  
+  
+    
+  
+  联系方式
+
+      </a>
+</li>
+</ul>
+</div>
+</nav>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航栏" class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="WentingJia's Personal Website" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="WentingJia's Personal Website">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m13.13 22.19-1.63-3.83c1.57-.58 3.04-1.36 4.4-2.27zM5.64 12.5l-3.83-1.63 6.1-2.77C7 9.46 6.22 10.93 5.64 12.5M21.61 2.39S16.66.269 11 5.93c-2.19 2.19-3.5 4.6-4.35 6.71-.28.75-.09 1.57.46 2.13l2.13 2.12c.55.56 1.37.74 2.12.46A19.1 19.1 0 0 0 18.07 13c5.66-5.66 3.54-10.61 3.54-10.61m-7.07 7.07c-.78-.78-.78-2.05 0-2.83s2.05-.78 2.83 0c.77.78.78 2.05 0 2.83s-2.05.78-2.83 0m-5.66 7.07-1.41-1.41zM6.24 22l3.64-3.64c-.34-.09-.67-.24-.97-.45L4.83 22zM2 22h1.41l4.77-4.76-1.42-1.41L2 20.59zm0-2.83 4.09-4.08c-.21-.3-.36-.62-.45-.97L2 17.76z"></path></svg>
+</a>
+    WentingJia's Personal Website
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+<span class="md-ellipsis">
+    主页
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../about/">
+<span class="md-ellipsis">
+    个人简历（欢迎查看下载）
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    项目经历
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            项目经历
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../projects/project1/">
+<span class="md-ellipsis">
+    超视距抛洒物感知预警系统
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../projects/project8/">
+<span class="md-ellipsis">
+    Paper-EMSA-Net
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../projects/project2/">
+<span class="md-ellipsis">
+    危化品在途运输主动防控系统
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../projects/project7/">
+<span class="md-ellipsis">
+    波比陪伴机器人
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../projects/project6/">
+<span class="md-ellipsis">
+    太空资源开发可行性研究
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../projects/project3/">
+<span class="md-ellipsis">
+    智能衣物护理机
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../projects/project4/">
+<span class="md-ellipsis">
+    杂项案例1
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../projects/project5/">
+<span class="md-ellipsis">
+    杂项案例2
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+<span class="md-ellipsis">
+    博客文章
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            博客文章
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_4_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+<span class="md-ellipsis">
+    文章
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_4_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_4_1">
+<span class="md-nav__icon md-icon"></span>
+            文章
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../paper1/">
+<span class="md-ellipsis">
+    2025/7/26
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    FreeRTOS
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    FreeRTOS
+    
+  </span>
+</a>
+<nav aria-label="目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#freertosfrom-yuannyang-yao">
+<span class="md-ellipsis">
+      FreeRTOS系统学习笔记(From Yuannyang Yao)
+    </span>
+</a>
+<nav aria-label="FreeRTOS系统学习笔记(From Yuannyang Yao)" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#rtos">
+<span class="md-ellipsis">
+      一、什么是RTOS
+    </span>
+</a>
+<nav aria-label="一、什么是RTOS" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#rtos_1">
+<span class="md-ellipsis">
+      RTOS对比裸机开发的优势
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#rtos_2">
+<span class="md-ellipsis">
+      RTOS 是如何实现多任务同时运行的？
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#stm32-freertos">
+<span class="md-ellipsis">
+      二、如何创建STM32 中的FreeRTOS 工程
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#freertos-task">
+<span class="md-ellipsis">
+      三、什么是FreeRTOS 的Task
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1">
+<span class="md-ellipsis">
+      四、任务间通信和同步
+    </span>
+</a>
+<nav aria-label="四、任务间通信和同步" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2">
+<span class="md-ellipsis">
+      我们要讨论什么？
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_3">
+<span class="md-ellipsis">
+      什么是队列？
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_4">
+<span class="md-ellipsis">
+      如何使用队列？
+    </span>
+</a>
+<nav aria-label="如何使用队列？" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1">
+<span class="md-ellipsis">
+      1.创建队列
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2">
+<span class="md-ellipsis">
+      2.发送任务
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3">
+<span class="md-ellipsis">
+      3.接受任务
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_5">
+<span class="md-ellipsis">
+      什么是信号量？
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_6">
+<span class="md-ellipsis">
+      递归互斥锁
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../paper3/">
+<span class="md-ellipsis">
+    LVGL屏幕
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../paper4/">
+<span class="md-ellipsis">
+    2025/8/
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../paper5/">
+<span class="md-ellipsis">
+    2025/8/
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../paper6/">
+<span class="md-ellipsis">
+    2025/8/
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../all/">
+<span class="md-ellipsis">
+    总览
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<span class="md-ellipsis">
+    生活时刻（小确幸）
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            生活时刻（小确幸）
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../plog/life1/">
+<span class="md-ellipsis">
+    2025/8/4
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../plog/life2/">
+<span class="md-ellipsis">
+    2025/8/5
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../plog/life3/">
+<span class="md-ellipsis">
+    2025/8/
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../plog/life4/">
+<span class="md-ellipsis">
+    2025/8/
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../plog/life5/">
+<span class="md-ellipsis">
+    2025/8/
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../plog/life6/">
+<span class="md-ellipsis">
+    2025/8/
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../contact/">
+<span class="md-ellipsis">
+    联系方式
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1>FreeRTOS</h1>
+<div class="document-dates-plugin-wrapper document-dates-top"><div class="document-dates-plugin"><span data-tippy-content="创建时间: 2025-08-28"><span class="material-icons" data-icon="doc_created"></span><time datetime="2025-08-28T10:51:03+08:00" locale="zh_CN">2025-08-28</time></span><span data-tippy-content="最后更新: 2025-08-28"><span class="material-icons" data-icon="doc_modified"></span><time datetime="2025-08-28T02:51:15.092836+00:00" locale="zh_CN">2025-08-28</time></span><span class="material-icons" data-icon="doc_author"></span><div class="avatar-group"><div class="avatar-wrapper" data-name="JocelynJS369" data-tippy-content='作者: &lt;a href="mailto:2582038894@qq.com"&gt;JocelynJS369&lt;/a&gt;'><span class="avatar-text"></span></div></div></div></div>
+<h2 id="freertosfrom-yuannyang-yao">FreeRTOS系统学习笔记(From Yuannyang Yao)</h2>
+<h4 id="rtos">一、什么是RTOS</h4>
+<blockquote>
+<p>RTOS 是实时操作系统，可以做到多任务调度同时进行，具体是操作系统的知识，目前我还没学过操作系统这本书，后续有时间就看这个教程<a href="https://www.bilibili.com/video/BV1RK4y1R7Kf/?spm_id_from=333.337.search-card.all.click&amp;vd_source=0eca01c47c4ad87639d2c7d858e5b3c8">B 站视频教程</a></p>
+</blockquote>
+<h5 id="rtos_1">RTOS对比裸机开发的优势</h5>
+<blockquote>
+<p>优势就在于代码量的减少，比如要实现LED0 500ms 亮一次，LED1 1000ms 亮一次，我们在裸机开发时是这样写的</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">current_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HAL_GetTick</span><span class="p">();</span><span class="c1">//获取当前时间</span>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">  </span><span class="c1">//控制 LED0 500ms 亮一次</span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">current_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">timestamp_led0</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">500</span><span class="p">){</span>
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">    </span><span class="n">GPIOA</span><span class="o">-&gt;</span><span class="n">ODR</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">0</span><span class="p">);</span>
+<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">    </span><span class="n">timestamp_led0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_time</span><span class="p">;</span><span class="w"> </span>
+<a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">  </span><span class="c1">//控制 LED1 1000ms 亮一次</span>
+<a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">current_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">timestamp_led1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1000</span><span class="p">){</span>
+<a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="n">GPIOA</span><span class="o">-&gt;</span><span class="n">ODR</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">);</span>
+<a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">    </span><span class="n">timestamp_led1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_time</span><span class="p">;</span>
+<a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="p">}</span>
+</code></pre></div>
+<p>实际上是用两个记号来记录时间点，来做到异步亮灭，这很麻烦，而如果我们用 RTOS 操作系统，我们现在是学习FreeRTOS,怎么写呢？</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"FreeRTOS.h"</span>
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"task.h"</span>
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="c1">// 任务句柄声明</span>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="n">TaskHandle_t</span><span class="w"> </span><span class="n">led0_task_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="n">TaskHandle_t</span><span class="w"> </span><span class="n">led1_task_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>
+<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>
+<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="kt">void</span><span class="w"> </span><span class="nf">led0task</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">parameters</span><span class="p">){</span>
+<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+<a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">    </span><span class="n">GPIO</span><span class="o">-&gt;</span><span class="n">ODR</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">0</span><span class="p">);</span>
+<a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">    </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">500</span><span class="p">));</span>
+<a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="p">}</span>
+<a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a>
+<a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="kt">void</span><span class="w"> </span><span class="nf">led1task</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">parameters</span><span class="p">){</span>
+<a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+<a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">    </span><span class="n">GPIO</span><span class="o">-&gt;</span><span class="n">ODR</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">);</span>
+<a href="#__codelineno-1-19" id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="w">    </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">1000</span><span class="p">));</span>
+<a href="#__codelineno-1-20" id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="w">  </span><span class="p">}</span>
+<a href="#__codelineno-1-21" id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="p">}</span>
+<a href="#__codelineno-1-22" id="__codelineno-1-22" name="__codelineno-1-22"></a>
+<a href="#__codelineno-1-23" id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-1-24" id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="w">    </span><span class="n">HAL_Init</span><span class="p">();</span>
+<a href="#__codelineno-1-25" id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="w">    </span><span class="n">SystemClock_Config</span><span class="p">();</span>
+<a href="#__codelineno-1-26" id="__codelineno-1-26" name="__codelineno-1-26"></a><span class="w">    </span><span class="n">MX_GPIO_Init</span><span class="p">();</span>
+<a href="#__codelineno-1-27" id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="w">    </span>
+<a href="#__codelineno-1-28" id="__codelineno-1-28" name="__codelineno-1-28"></a><span class="w">    </span><span class="c1">// 创建LED0任务</span>
+<a href="#__codelineno-1-29" id="__codelineno-1-29" name="__codelineno-1-29"></a><span class="w">    </span><span class="n">xTaskCreate</span><span class="p">(</span>
+<a href="#__codelineno-1-30" id="__codelineno-1-30" name="__codelineno-1-30"></a><span class="w">        </span><span class="n">led0task</span><span class="p">,</span><span class="w">           </span><span class="c1">// 任务函数</span>
+<a href="#__codelineno-1-31" id="__codelineno-1-31" name="__codelineno-1-31"></a><span class="w">        </span><span class="s">"LED0_Task"</span><span class="p">,</span><span class="w">         </span><span class="c1">// 任务名称</span>
+<a href="#__codelineno-1-32" id="__codelineno-1-32" name="__codelineno-1-32"></a><span class="w">        </span><span class="mi">128</span><span class="p">,</span><span class="w">                 </span><span class="c1">// 任务栈大小（以字为单位）</span>
+<a href="#__codelineno-1-33" id="__codelineno-1-33" name="__codelineno-1-33"></a><span class="w">        </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                </span><span class="c1">// 传递给任务的参数</span>
+<a href="#__codelineno-1-34" id="__codelineno-1-34" name="__codelineno-1-34"></a><span class="w">        </span><span class="n">tskIDLE_PRIORITY</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="c1">// 任务优先级</span>
+<a href="#__codelineno-1-35" id="__codelineno-1-35" name="__codelineno-1-35"></a><span class="w">        </span><span class="o">&amp;</span><span class="n">led0_task_handle</span><span class="w">    </span><span class="c1">// 任务句柄</span>
+<a href="#__codelineno-1-36" id="__codelineno-1-36" name="__codelineno-1-36"></a><span class="w">    </span><span class="p">);</span>
+<a href="#__codelineno-1-37" id="__codelineno-1-37" name="__codelineno-1-37"></a><span class="w">    </span>
+<a href="#__codelineno-1-38" id="__codelineno-1-38" name="__codelineno-1-38"></a><span class="w">    </span><span class="c1">// 创建LED1任务</span>
+<a href="#__codelineno-1-39" id="__codelineno-1-39" name="__codelineno-1-39"></a><span class="w">    </span><span class="n">xTaskCreate</span><span class="p">(</span>
+<a href="#__codelineno-1-40" id="__codelineno-1-40" name="__codelineno-1-40"></a><span class="w">        </span><span class="n">led1task</span><span class="p">,</span><span class="w">           </span><span class="c1">// 任务函数</span>
+<a href="#__codelineno-1-41" id="__codelineno-1-41" name="__codelineno-1-41"></a><span class="w">        </span><span class="s">"LED1_Task"</span><span class="p">,</span><span class="w">         </span><span class="c1">// 任务名称</span>
+<a href="#__codelineno-1-42" id="__codelineno-1-42" name="__codelineno-1-42"></a><span class="w">        </span><span class="mi">128</span><span class="p">,</span><span class="w">                 </span><span class="c1">// 任务栈大小</span>
+<a href="#__codelineno-1-43" id="__codelineno-1-43" name="__codelineno-1-43"></a><span class="w">        </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                </span><span class="c1">// 传递给任务的参数</span>
+<a href="#__codelineno-1-44" id="__codelineno-1-44" name="__codelineno-1-44"></a><span class="w">        </span><span class="n">tskIDLE_PRIORITY</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="c1">// 任务优先级</span>
+<a href="#__codelineno-1-45" id="__codelineno-1-45" name="__codelineno-1-45"></a><span class="w">        </span><span class="o">&amp;</span><span class="n">led1_task_handle</span><span class="w">    </span><span class="c1">// 任务句柄</span>
+<a href="#__codelineno-1-46" id="__codelineno-1-46" name="__codelineno-1-46"></a><span class="w">    </span><span class="p">);</span>
+<a href="#__codelineno-1-47" id="__codelineno-1-47" name="__codelineno-1-47"></a><span class="w">    </span>
+<a href="#__codelineno-1-48" id="__codelineno-1-48" name="__codelineno-1-48"></a><span class="w">    </span><span class="c1">// 启动FreeRTOS调度器</span>
+<a href="#__codelineno-1-49" id="__codelineno-1-49" name="__codelineno-1-49"></a><span class="w">    </span><span class="n">vTaskStartScheduler</span><span class="p">();</span>
+<a href="#__codelineno-1-50" id="__codelineno-1-50" name="__codelineno-1-50"></a><span class="w">    </span>
+<a href="#__codelineno-1-51" id="__codelineno-1-51" name="__codelineno-1-51"></a>
+<a href="#__codelineno-1-52" id="__codelineno-1-52" name="__codelineno-1-52"></a><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-1-53" id="__codelineno-1-53" name="__codelineno-1-53"></a><span class="w">        </span><span class="c1">// Error handling</span>
+<a href="#__codelineno-1-54" id="__codelineno-1-54" name="__codelineno-1-54"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-1-55" id="__codelineno-1-55" name="__codelineno-1-55"></a><span class="p">}</span>
+</code></pre></div>
+<p>我们发现第二段代码反而更长了，那是因为这个项目我们动了脑子以后想到了好方法，但是用 RTOS，很明显，不用动脑子想设计，而且在更复杂的项目时更加简单易懂，模块化</p>
+</blockquote>
+<h5 id="rtos_2">RTOS 是如何实现多任务同时运行的？</h5>
+<blockquote>
+<p>利用时间切片的逻辑，将一条时间线切分成多个时间片，一个 Task 运行一个时间片，并快速切换，且区分 Task 优先级，优先级高的 Task 允许连续使用多个时间片，最多 25 级</p>
+</blockquote>
+<h4 id="stm32-freertos">二、如何创建STM32 中的FreeRTOS 工程</h4>
+<blockquote>
+<p>我现在急着学 esp32，这一步先跳，以后再学</p>
+</blockquote>
+<h4 id="freertos-task">三、什么是FreeRTOS 的Task</h4>
+<blockquote>
+<p>Task 就是 FreeRTOS 的执行单元，FreeRTOS 在Task 之间反复切换来使用计算资源</p>
+<p>每一个 Task 的基本结构都是这样
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">my_task</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">parameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="c1">// 初始化代码（只执行一次）</span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="c1">// 任务的主循环（一直重复）</span>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">        </span><span class="c1">// 做一些工作</span>
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">        </span>
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">        </span><span class="c1">// 让出CPU给其他任务</span>
+<a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">时间</span><span class="p">);</span>
+<a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="p">}</span>
+</code></pre></div></p>
+<p>Task 的生命周期
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">led_task</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">parameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">    </span><span class="c1">// 1. 任务创建后，从这里开始执行</span>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="c1">// 2. 初始化工作</span>
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="n">配置GPIO</span><span class="p">();</span>
+<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span>
+<a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="c1">// 3. 进入无限循环</span>
+<a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">        </span><span class="c1">// 4. 执行任务工作</span>
+<a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">        </span><span class="n">GPIOA</span><span class="o">-&gt;</span><span class="n">ODR</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// 切换LED</span>
+<a href="#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">        </span>
+<a href="#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">        </span><span class="c1">// 5. 休眠，让其他任务运行</span>
+<a href="#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">500</span><span class="p">));</span>
+<a href="#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">        </span>
+<a href="#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">        </span><span class="c1">// 6. 500ms后，任务被唤醒，继续循环</span>
+<a href="#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-3-17" id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">    </span>
+<a href="#__codelineno-3-18" id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">    </span><span class="c1">// 7. 正常情况下永远不会到这里</span>
+<a href="#__codelineno-3-19" id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="p">}</span>
+</code></pre></div></p>
+<p>如何创建Task 呢？创建 Task 的基本步骤如下
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1">// 1. 声明任务句柄</span>
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">TaskHandle_t</span><span class="w"> </span><span class="n">led_task_handle</span><span class="p">;</span>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>
+<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="c1">// 2. 创建任务</span>
+<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="n">xTaskCreate</span><span class="p">(</span>
+<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">    </span><span class="n">led_task</span><span class="p">,</span><span class="w">              </span><span class="c1">// 任务函数</span>
+<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="s">"LED_Task"</span><span class="p">,</span><span class="w">            </span><span class="c1">// 任务名称（用于调试）</span>
+<a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span><span class="mi">128</span><span class="p">,</span><span class="w">                   </span><span class="c1">// 栈大小</span>
+<a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">                  </span><span class="c1">// 传递给任务的参数</span>
+<a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w">                     </span><span class="c1">// 任务优先级</span>
+<a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">    </span><span class="o">&amp;</span><span class="n">led_task_handle</span><span class="w">       </span><span class="c1">// 任务句柄</span>
+<a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="p">);</span>
+<a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a>
+<a href="#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="c1">// 3. 启动调度器</span>
+<a href="#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="n">vTaskStartScheduler</span><span class="p">();</span>
+</code></pre></div></p>
+<p>关于Task 运行逻辑的流程图</p>
+</blockquote>
+<pre class="mermaid"><code>flowchart TD
+    subgraph "1. 初始化阶段 (Initialization Phase)"
+        A("用户代码调用 xTaskCreate()") --&gt; B{"创建 TCF 和任务堆栈&lt;br&gt;Task Control Block &amp; Stack"}
+        B --&gt; C("将任务添加到就绪列表&lt;br&gt;pxReadyTasksLists")
+        C -- "循环创建更多任务" --&gt; A
+        C --&gt; D("用户代码调用 vTaskStartScheduler()")
+        D --&gt; E("配置并启动 SysTick 定时器&lt;br&gt;vPortStartFirstTask() 启动最高优先级任务")
+    end
+
+    subgraph "2. 任务状态与转换 (Task States &amp; Transitions)"
+        F["&lt;font color=white&gt;&lt;b&gt;运行态 (Running)&lt;/b&gt;&lt;/font&gt;&lt;br&gt;CPU 核心正在执行该任务的代码"]
+        G["&lt;font color=white&gt;&lt;b&gt;就绪态 (Ready)&lt;/b&gt;&lt;/font&gt;&lt;br&gt;可运行，但等待 CPU"]
+        H["&lt;font color=black&gt;&lt;b&gt;阻塞态 (Blocked)&lt;/b&gt;&lt;/font&gt;&lt;br&gt;等待某个事件&lt;br&gt;(延时、信号量、队列)"]
+        I["&lt;font color=white&gt;&lt;b&gt;挂起态 (Suspended)&lt;/b&gt;&lt;/font&gt;&lt;br&gt;被显式暂停，不参与调度"]
+    end
+
+    E --&gt; F
+
+    subgraph "3. 核心调度逻辑 (Core Scheduling Logic)"
+        %% 从运行态转换出去
+        F -- "&lt;b&gt;情况 1: 时间片用完&lt;/b&gt;&lt;br&gt;SysTick 中断" --&gt; K{"请求调度&lt;br&gt;任务移到就绪列表末尾"}
+        F -- "&lt;b&gt;情况 2: 主动放弃 CPU&lt;/b&gt;&lt;br&gt;调用 taskYIELD()" --&gt; K
+        F -- "&lt;b&gt;情况 3: 任务阻塞&lt;/b&gt;&lt;br&gt;调用 vTaskDelay(), xQueue...()" --&gt; L{"任务从就绪列表移除&lt;br&gt;添加到延时/事件列表"}
+        F -- "&lt;b&gt;情况 4: 被抢占&lt;/b&gt;&lt;br&gt;更高优先级任务就绪" --&gt; K
+        F -- "&lt;b&gt;情况 5: 任务挂起&lt;/b&gt;&lt;br&gt;调用 vTaskSuspend()" --&gt; M{"任务从所有列表移除&lt;br&gt;添加到 xSuspendedTaskList"}
+
+        %% 状态转换
+        L --&gt; H
+        M --&gt; I
+
+        %% 从其他状态恢复
+        H -- "&lt;b&gt;事件发生&lt;/b&gt;&lt;br&gt;超时, 队列/信号量有效" --&gt; G
+        I -- "&lt;b&gt;任务恢复&lt;/b&gt;&lt;br&gt;调用 vTaskResume()" --&gt; G
+        J(("&lt;b&gt;中断服务程序 (ISR)&lt;/b&gt;")) -- "调用 ...FromISR() API" --&gt; G
+
+        %% 就绪态与调度器
+        K --&gt; TriggerSwitch("设置 PendSV 中断挂起位")
+        G -- "新任务优先级&lt;br&gt;&gt; 当前任务优先级" --&gt; TriggerSwitch
+
+        TriggerSwitch -- "执行 PendSV_Handler" --&gt; N(("&lt;font color=white&gt;&lt;b&gt;上下文切换&lt;br&gt;vTaskSwitchContext()&lt;/b&gt;&lt;/font&gt;"))
+        N -- "选择就绪列表中&lt;br&gt;优先级最高的任务" --&gt; F
+    end
+
+    %% 样式定义
+    style F fill:#28a745,stroke:#333,stroke-width:2px
+    style G fill:#007bff,stroke:#333,stroke-width:2px
+    style H fill:#ffc107,stroke:#333,stroke-width:2px
+    style I fill:#dc3545,stroke:#333,stroke-width:2px
+
+    style J fill:#6f42c1,stroke:#fff,stroke-width:2px,color:white
+    style K fill:#6c757d,stroke:#fff,stroke-width:1px,color:white
+    style L fill:#6c757d,stroke:#fff,stroke-width:1px,color:white
+    style M fill:#6c757d,stroke:#fff,stroke-width:1px,color:white
+    style TriggerSwitch fill:#6c757d,stroke:#fff,stroke-width:1px,color:white
+    style N fill:#17a2b8,stroke:#fff,stroke-width:2px,color:white
+</code></pre>
+<h4 id="_1">四、任务间通信和同步</h4>
+<h5 id="_2">我们要讨论什么？</h5>
+<blockquote>
+<p>我们下一步要关心的核心是:Task 之间要如何协作，由此，我们引出了两个问题</p>
+<blockquote>
+<p>1.如何通信，传递数据？
+2.如何顺序执行，让一个人物在另一个任务结束，拿到参数后才工作？</p>
+</blockquote>
+<p>这就需要了解 FreeRTOS 的概念:队列 <strong>queue</strong></p>
+</blockquote>
+<h5 id="_3">什么是队列？</h5>
+<blockquote>
+<p>队列就像一个线程安全的<strong>邮箱</strong>。发送方把信（数据）投进去，接收方从里面取信。邮箱自己管理着谁在排队等信，以及信箱满了怎么办。</p>
+</blockquote>
+<h5 id="_4">如何使用队列？</h5>
+<blockquote>
+<h6 id="1">1.创建队列</h6>
+<blockquote>
+<p>在使用之前，我们必须先创建一个队列对象。这通常在 <code>main</code> 函数或系统初始化函数中完成。</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"FreeRTOS.h"</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"queue.h"</span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="c1">// 定义一个队列句柄 (Handle)</span>
+<a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="n">QueueHandle_t</span><span class="w"> </span><span class="n">xNumberQueue</span><span class="p">;</span>
+<a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a>
+<a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="c1">// 在启动调度器前创建它</span>
+<a href="#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="c1">// 创建一个队列，长度为 5，每个元素是一个 int 的大小</span>
+<a href="#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">    </span><span class="n">xNumberQueue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xQueueCreate</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<a href="#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a>
+<a href="#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">    </span><span class="c1">// ... 创建任务 ...</span>
+<a href="#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">    </span><span class="c1">// ... 启动调度器 ...</span>
+<a href="#__codelineno-5-14" id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="p">}</span>
+</code></pre></div>
+</blockquote>
+<h6 id="2">2.发送任务</h6>
+<blockquote>
+<p>任务 A 负责生成数据并将其发送到队列中。</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Task_A_Sender</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">number_to_send</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"Sender:  Producing number %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">number_to_send</span><span class="p">);</span>
+<a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">        </span>
+<a href="#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">        </span><span class="c1">// 将数据发送到队列</span>
+<a href="#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">        </span><span class="n">BaseType_t</span><span class="w"> </span><span class="n">xStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xQueueSend</span><span class="p">(</span><span class="n">xNumberQueue</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">number_to_send</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="p">);</span>
+<a href="#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a>
+<a href="#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdPASS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">"Sender:  Successfully sent %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">number_to_send</span><span class="p">);</span>
+<a href="#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">"Sender:  Could not send to the queue.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<a href="#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">        </span><span class="p">}</span>
+<a href="#__codelineno-6-14" id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="w">        </span>
+<a href="#__codelineno-6-15" id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="w">        </span><span class="n">number_to_send</span><span class="o">++</span><span class="p">;</span>
+<a href="#__codelineno-6-16" id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">1000</span><span class="p">));</span><span class="w"> </span><span class="c1">// 每秒发送一次</span>
+<a href="#__codelineno-6-17" id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-6-18" id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="p">}</span>
+</code></pre></div>
+</blockquote>
+<h5 id="3">3.接受任务</h5>
+<blockquote>
+<p>任务 B 负责从队列中“接收”数据并处理。</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">Task_B_Receiver</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">received_number</span><span class="p">;</span>
+<a href="#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">        </span><span class="c1">// 从队列接收数据</span>
+<a href="#__codelineno-7-5" id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="w">        </span><span class="n">BaseType_t</span><span class="w"> </span><span class="n">xStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xQueueReceive</span><span class="p">(</span><span class="n">xNumberQueue</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">received_number</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="p">);</span>
+<a href="#__codelineno-7-6" id="__codelineno-7-6" name="__codelineno-7-6"></a>
+<a href="#__codelineno-7-7" id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdPASS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-7-8" id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">"Receiver: Got number %d from queue!</span><span class="se">\n\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">received_number</span><span class="p">);</span>
+<a href="#__codelineno-7-9" id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="w">        </span><span class="p">}</span>
+<a href="#__codelineno-7-10" id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-7-11" id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="p">}</span>
+</code></pre></div>
+</blockquote>
+</blockquote>
+<h5 id="_5">什么是信号量？</h5>
+<blockquote>
+<p>信号量的底层就是队列，只是概念上的区别，信号量是用于任务同步的，是标志，而队列给的是信息，换句话说，一个是令牌，一个是信件</p>
+<p>信号量主要分为两种：</p>
+<blockquote>
+<p>1.二进制信号量：令牌只有一个。要么有，要么没有。主要用于 任务同步。</p>
+<p>2.计数信号量：有一堆令牌。主要用于 资源计数。</p>
+</blockquote>
+<p>对于二进制信号量，其底层机制就是一个长度为 1 的队列，当你创建一个二进制信号量时，FreeRTOS 底层做的事情约等于：
+<code>xQueueCreate(1, 0);</code>
+它创建了一个长度为 1、元素大小为 0 的队列。
+长度为 1：代表“令牌”只有一份，要么在队列里（可用），要么不在（不可用）。
+大小为 0：因为我们不关心数据内容，所以不需要为数据分配存储空间，非常节省内存。</p>
+<p><code>xSemaphoreGive()</code> (给出信号) ≈ <code>xQueueSend()</code> (往队列里放个东西)</p>
+<p><code>xSemaphoreTake()</code> (等待信号) ≈ <code>xQueueReceive()</code> (从队列里取个东西)</p>
+<p>对于计数信号量，其实就是长度不为 1 的队列，这就是个纯概念上的不同，用来管理多个同类资源。</p>
+<p>有一个经典的停车场管理例子：一个停车场总共有 10 个车位。多辆车（任务）随时可能到达，想要停车。当车位满了，后来的车必须在入口外排队等待。有车离开时，排在最前面的车可以进入。</p>
+<p>首先做初始化</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"FreeRTOS.h"</span>
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">"semphr.h"</span>
+<a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a>
+<a href="#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="c1">// 定义一个信号量句柄</span>
+<a href="#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="n">SemaphoreHandle_t</span><span class="w"> </span><span class="n">xParkingSpaces</span><span class="p">;</span>
+<a href="#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a>
+<a href="#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">    </span><span class="c1">// 创建一个计数信号量</span>
+<a href="#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">    </span><span class="c1">// 最大计数值为 10 (总车位)</span>
+<a href="#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">    </span><span class="c1">// 初始计数值为 10 (刚开始所有车位都是空的)</span>
+<a href="#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">    </span><span class="n">xParkingSpaces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xSemaphoreCreateCounting</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<a href="#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a>
+<a href="#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">    </span><span class="c1">// ... 创建多个 CarTask (模拟汽车) ...</span>
+<a href="#__codelineno-8-14" id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">    </span><span class="c1">// ... 启动调度器 ...</span>
+<a href="#__codelineno-8-15" id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="p">}</span>
+</code></pre></div>
+<p>然后是汽车任务，每个 <code>CarTask</code> 都模拟一辆想要停车的汽车。</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">CarTask</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">carName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">p</span><span class="p">;</span><span class="w"> </span><span class="c1">// 获取汽车的名字</span>
+<a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a>
+<a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"%s is driving towards the parking lot.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">carName</span><span class="p">);</span>
+<a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">        </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="n">uxRandom</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">5000</span><span class="p">));</span><span class="w"> </span><span class="c1">// 模拟开车时间</span>
+<a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a>
+<a href="#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"%s arrived. Checking for available spaces...</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">carName</span><span class="p">);</span>
+<a href="#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">        </span>
+<a href="#__codelineno-9-10" id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">        </span><span class="c1">// 尝试获取一个车位 (Take the semaphore)</span>
+<a href="#__codelineno-9-11" id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">        </span><span class="c1">// 如果没有车位了 (计数值为0)，任务将在此处阻塞等待</span>
+<a href="#__codelineno-9-12" id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xSemaphoreTake</span><span class="p">(</span><span class="n">xParkingSpaces</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdTRUE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-9-13" id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="w">            </span><span class="c1">// 代码能执行到这里，说明一定成功获取了一个车位</span>
+<a href="#__codelineno-9-14" id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">"&gt;&gt; Great! %s has parked.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">carName</span><span class="p">);</span>
+<a href="#__codelineno-9-15" id="__codelineno-9-15" name="__codelineno-9-15"></a>
+<a href="#__codelineno-9-16" id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="w">            </span><span class="c1">// 模拟停车时间</span>
+<a href="#__codelineno-9-17" id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="w">            </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">5000</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">uxRandom</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">5000</span><span class="p">)));</span>
+<a href="#__codelineno-9-18" id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="w">            </span>
+<a href="#__codelineno-9-19" id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">"&lt;&lt; %s is leaving the parking lot.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">carName</span><span class="p">);</span>
+<a href="#__codelineno-9-20" id="__codelineno-9-20" name="__codelineno-9-20"></a><span class="w">            </span>
+<a href="#__codelineno-9-21" id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="w">            </span><span class="c1">// 释放车位 (Give the semaphore back)</span>
+<a href="#__codelineno-9-22" id="__codelineno-9-22" name="__codelineno-9-22"></a><span class="w">            </span><span class="n">xSemaphoreGive</span><span class="p">(</span><span class="n">xParkingSpaces</span><span class="p">);</span>
+<a href="#__codelineno-9-23" id="__codelineno-9-23" name="__codelineno-9-23"></a><span class="w">        </span><span class="p">}</span>
+<a href="#__codelineno-9-24" id="__codelineno-9-24" name="__codelineno-9-24"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-9-25" id="__codelineno-9-25" name="__codelineno-9-25"></a><span class="p">}</span>
+</code></pre></div>
+<p>最后做个表格来总结信号量的知识</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>二进制信号量</th>
+<th>计数信号量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>核心用途</strong></td>
+<td><strong>事件同步</strong> (A 通知 B)</td>
+<td><strong>资源管理</strong> (N 个资源)</td>
+</tr>
+<tr>
+<td><strong>底层等价物</strong></td>
+<td>长度为 1 的队列</td>
+<td>长度为 N 的队列</td>
+</tr>
+<tr>
+<td><strong>初始状态</strong></td>
+<td><strong>空</strong> (必须先 Give)</td>
+<td><strong>满</strong>或指定值 (可以先 Take)</td>
+</tr>
+<tr>
+<td><strong><code>Give</code> 行为</strong></td>
+<td>只能给一个，重复给无效</td>
+<td>可以连续 <code>Give</code> 直到计数值达到最大值</td>
+</tr>
+<tr>
+<td><strong><code>Take</code> 行为</strong></td>
+<td>拿走唯一的一个</td>
+<td>拿走 N 个中的一个</td>
+</tr>
+<tr>
+<td><strong>典型场景</strong></td>
+<td>中断通知任务</td>
+<td>停车场、数据库连接池、打印机队列</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>互斥锁</p>
+<blockquote>
+<p>互斥锁的生命周期:创建 -&gt; 获取 -&gt; 持有（临界区）-&gt; 释放 -&gt; (重复获取...)
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">SemaphoreHandle_t</span><span class="w"> </span><span class="n">xPrintingMutex</span><span class="p">;</span>
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a>
+<a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="c1">// 创建一个互斥锁</span>
+<a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">    </span><span class="n">xPrintingMutex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xSemaphoreCreateMutex</span><span class="p">();</span>
+<a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a>
+<a href="#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xPrintingMutex</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">        </span><span class="c1">// 成功创建！可以继续创建任务了</span>
+<a href="#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">    </span><span class="p">}</span>
+<a href="#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="p">}</span>
+</code></pre></div></p>
+<p>它做了什么？ 这会在系统内存中创建一个“钥匙挂钩”对象。这个对象不仅包含了“钥匙是否可用”的状态，还包含了一个非常重要的信息：<code>pxMutexHolder</code>，一个指向当前持有该锁的任务（TCB）的指针</p>
+<p>初始状态：Mutex 创建后，钥匙是挂在钩子上的，<code>pxMutexHolder</code> 指向 <code>NULL</code></p>
+<p>获取：<code>xSemaphoreTake(xMutex, xBlockTime)</code>这是进入临界区前的“取钥匙”动作
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xSemaphoreTake</span><span class="p">(</span><span class="n">xPrintingMutex</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdTRUE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">    </span><span class="c1">// --- 成功拿到锁，临界区开始 ---</span>
+<a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">    </span>
+<a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="c1">// ... 在这里安全地访问打印机 ...</span>
+<a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">    </span>
+<a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="c1">// --- 临界区结束 ---</span>
+<a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><code>xSemaphoreTake</code> 的内部逻辑：</p>
+<p>检查钥匙：查看 <code>pxMutexHolder</code> 是否为 <code>NULL</code></p>
+<p>如果可用 (<code>NULL</code>)：</p>
+<blockquote>
+<p>将 <code>pxMutexHolder</code> 指向<strong>当前任务</strong>的 TCB（记录下“是我拿了钥匙”）</p>
+<p>返回 <code>pdTRUE</code></p>
+</blockquote>
+<p>如果不可用 (已被占用)：</p>
+<blockquote>
+<p>检查优先级继承：比较当前任务和 <code>pxMutexHolder</code> 所指任务的优先级，如果当前任务优先级更高，则临时提升持有者任务的优先级</p>
+<p>阻塞等待：根据 <code>xBlockTime</code> 参数，将当前任务放入该 Mutex 的等待列表，并进入阻塞态</p>
+</blockquote>
+<p>释放：<code>xSemaphoreGive(xMutex)</code>这是离开临界区后的“还钥匙”动作
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xSemaphoreTake</span><span class="p">(</span><span class="n">xPrintingMutex</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdTRUE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">    </span><span class="c1">// ... 临界区 ...</span>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">    </span>
+<a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">    </span><span class="n">xSemaphoreGive</span><span class="p">(</span><span class="n">xPrintingMutex</span><span class="p">);</span><span class="w"> </span><span class="c1">// 必须归还！</span>
+<a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="p">}</span>
+</code></pre></div></p>
+<p><code>xSemaphoreGive</code> 的内部逻辑：</p>
+<blockquote>
+<p>验证所有权：检查 <code>pxMutexHolder</code> 是否指向当前任务。如果不是（比如另一个任务试图释放不属于它的锁），函数会直接返回错误。这是 Mutex 和二进制信号量的核心区别之一</p>
+<p>恢复优先级：如果之前因为优先级继承提升了当前任务的优先级，此时将其恢复到原始优先级</p>
+<p>释放钥匙：将 <code>pxMutexHolder</code> 重新设为 <code>NULL</code></p>
+<p>唤醒等待者：检查该 Mutex 的等待列表，如果有任务在等待，则唤醒一个（通常是优先级最高的那个），让它可以去 <code>Take</code> 这个锁</p>
+</blockquote>
+</blockquote>
+<h5 id="_6">递归互斥锁</h5>
+<blockquote>
+<p>有时候，代码结构会导致一个任务重复获取同一个锁</p>
+<p>一个复杂的函数 <code>Func_A</code> 获取了打印机锁，然后为了复用代码，它调用了另一个函数 <code>Func_B</code>，而 <code>Func_B</code> 内部也需要获取同一个打印机锁</p>
+<p>使用普通 Mutex：<code>Func_A</code> 拿了锁。当它调用 <code>Func_B</code>，<code>Func_B</code> 再次尝试 <code>Take</code> 同一个锁时，它会发现锁已经被“别人”（实际上是自己）拿走了，于是它会自己把自己阻塞掉，形成死锁 (Deadlock)</p>
+<p>解决方案：使用递归锁</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="c1">// 创建一个递归互斥锁</span>
+<a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="n">xPrintingMutex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xSemaphoreCreateRecursiveMutex</span><span class="p">();</span>
+<a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a>
+<a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="c1">// 获取/释放递归锁</span>
+<a href="#__codelineno-13-5" id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="n">xSemaphoreTakeRecursive</span><span class="p">(</span><span class="n">xPrintingMutex</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="p">);</span>
+<a href="#__codelineno-13-6" id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="n">xSemaphoreGiveRecursive</span><span class="p">(</span><span class="n">xPrintingMutex</span><span class="p">);</span>
+</code></pre></div>
+<p>工作原理：递归锁内部除了<code>pxMutexHolder</code>，还有一个递归计数器 <code>uxRecursiveCallCount</code></p>
+<p>第一次 <code>TakeRecursive</code>: 成功获取，计数器置为 1</p>
+<p>后续 <code>TakeRecursive</code> (由同一个任务调用): 检查发现 <code>pxMutexHolder</code> 就是自己，于是直接成功返回，并将计数器加 1</p>
+<p><code>GiveRecursive</code>: 只是将计数器减 1。</p>
+<p>真正释放：只有当计数器从 1 减到 0 时，锁才会被真正释放 (<code>pxMutexHolder</code> 被设为 <code>NULL</code>)，其他等待的任务才能获取它。</p>
+</blockquote>
+<pre class="mermaid"><code>graph TD 
+  subgraph "FreeRTOS 任务间通信"
+
+
+  Start("开始: 我需要任务间协作") --&gt; Q1{"要传递的是&lt;b&gt;具体数据&lt;/b&gt;, 还是仅需一个&lt;b&gt;信号/事件&lt;/b&gt;?"};
+
+  Q1 -- "传递具体数据&lt;br&gt;(例如: 传感器读数, 消息包)" --&gt; Queue["&lt;font size=4&gt;&lt;b&gt;队列 (Queue)&lt;/b&gt;&lt;/font&gt;&lt;br&gt;FIFO 数据管道&lt;br&gt;数据通过复制传递, 实现任务解耦&lt;br&gt;&lt;b&gt;场景:&lt;/b&gt; 串口接收任务发数据给数据处理任务"];
+
+  Q1 -- "仅发送一个信号/事件" --&gt; Q2{"协作的目的是什么?"};
+
+  Q2 -- "&lt;b&gt;事件同步&lt;/b&gt;&lt;br&gt;(一个执行单元通知另一个'某事已发生')" --&gt; Semaphores;
+  Q2 -- "&lt;b&gt;资源互斥保护&lt;/b&gt;&lt;br&gt;(保证共享资源在同一时刻只被一个任务访问)" --&gt; Mutex["&lt;font size=4&gt;&lt;b&gt;互斥锁 (Mutex)&lt;/b&gt;&lt;/font&gt;&lt;br&gt;保护临界区, 实现线程安全&lt;br&gt;&lt;b&gt;核心机制: 优先级继承&lt;/b&gt;&lt;br&gt;&lt;i&gt;(自动解决'优先级反转'问题)&lt;/i&gt;&lt;br&gt;&lt;b&gt;场景:&lt;/b&gt; 保护全局变量, 访问打印机等外设"];
+
+  subgraph Semaphores ["信号量 (Semaphore)"]
+      direction LR
+      Sema_Q{"同步&lt;b&gt;单个'有/无'事件&lt;/b&gt;, &lt;br&gt;还是管理&lt;b&gt;多个同类资源&lt;/b&gt;?"}
+      Sema_Q -- "单个'有/无'事件" --&gt; BinSema["&lt;b&gt;二进制信号量&lt;/b&gt;&lt;br&gt;轻量级的'开关'或'信令'&lt;br&gt;初始为空, 必须先 Give 才能 Take&lt;br&gt;&lt;b&gt;场景:&lt;/b&gt; 按键中断(ISR)通知后台任务"]
+      Sema_Q -- "管理 N 个同类资源" --&gt; CountSema["&lt;b&gt;计数信号量&lt;/b&gt;&lt;br&gt;资源计数器&lt;br&gt;初始为 N (满), 可以直接 Take&lt;br&gt;&lt;b&gt;场景:&lt;/b&gt; 管理停车场车位, 数据库连接池"]
+  end
+
+  Mutex --&gt; RecursiveMutex["(特殊变种: &lt;b&gt;递归锁&lt;/b&gt;)&lt;br&gt;允许同一任务重复获取同一个锁&lt;br&gt;用于解决函数嵌套调用中的死锁问题"]
+
+  end
+
+  style Queue fill:#e6f3ff,stroke:#0066cc,stroke-width:1px
+  style Mutex fill:#fff2cc,stroke:#d6b656,stroke-width:1px
+  style BinSema fill:#e6ffed,stroke:#090,stroke-width:1px
+  style CountSema fill:#e6ffed,stroke:#090,stroke-width:1px</code></pre>
+<p>暂时先学这些</p>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  回到页面顶部
+</button>
+</main>
+<!-- Footer -->
+<footer class="md-footer">
+<!-- Link to previous and/or next page -->
+<!-- Further information -->
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div class="md-copyright__highlight">
+      Copyright © 2025 Wenting Jia
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<font color="#B9B9B9">
+<div class="footer-visit-count" style="display: flex; justify-content: center; align-items: center;">
+          本站访问量：
+          <script async="" src="//finicounter.eu.org/finicounter.js"></script>
+<span id="finicount_views"></span>  | 
+          <footer>
+<a href="https://icp.gov.moe/?keyword=20240122" target="_blank">萌ICP备20250726号</a>
+</footer>
+</div>
+</font>
+<style>
+        .footer-visit-count {
+          height: fit-content;
+          min-height: 55px;
+          /* 根据实际情况调整此高度 */
+        }
+      </style>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "toc.integrate", "contact.code.annotate", "content.tabs", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+<script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+<script src="../../js/custom.js"></script>
+<script src="../../js/extra.js"></script>
+<script src="../../js/mathjax.js"></script>
+<script src="../../assets/document_dates/core/timeago.full.min.js"></script>
+<script src="../../assets/document_dates/core/timeago-load.js"></script>
+<script src="../../assets/document_dates/tippy/popper.min.js"></script>
+<script src="../../assets/document_dates/tippy/tippy.umd.min.js"></script>
+<script src="../../assets/document_dates/core/core.js"></script>
+<script src="../../assets/document_dates/user.config.js"></script>
+</body>
+</html>
