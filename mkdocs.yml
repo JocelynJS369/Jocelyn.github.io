@@ -52,7 +52,7 @@ theme:
 # ========== 导航菜单 ==========
 nav:
   - 主页: index.md
-  - 个人简历（欢迎查看下载）: about.md
+  - 个人简历（欢迎查看）: about.md
   - 项目经历:
       - 超视距抛洒物感知预警系统: projects/project1.md
       - Paper-EMSA-Net: projects/project8.md
