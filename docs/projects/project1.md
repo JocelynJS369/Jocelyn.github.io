@@ -91,10 +91,10 @@
                 </h2>
                 <div class="photo-gallery">
                     <div class="photo-item"> 
-                    <img src="../assets/Pro1.jpg" alt="项目演示照片">
+                    <img src="../assets/pro1.jpg" alt="项目演示照片">
                     </div>
                     <div class="photo-item">
-                    <img src="../assets/Pro2.jpg" alt="系统架构图">
+                    <img src="../assets/pro2.jpg" alt="系统架构图">
                     </div>
                     <div class="photo-item"> 
                     <img src="../assets/pro3.jpg" alt="团队工作照">
